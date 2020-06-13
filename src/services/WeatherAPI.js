@@ -5,8 +5,8 @@ export default class WeatherAPI {
         this._url = `https://api.openweathermap.org/data/2.5/weather?q=`;
     }
 
-    async getWeather(city="Moscow", units="imperial") {
-        let result = await fetch(`${this._url}${city}&appid=${this.#APP_ID}&units=${units}`);
+    async getWeather(city="Moscow", units="imperial", lang="en") {
+        let result = await fetch(`${this._url}${city}&appid=${this.#APP_ID}&units=${units}&lang=${lang}`);
 
         if (!result.ok) {
             throw new Error(`Couldn't fetch ${result.url}. Status: ${result.status}`);

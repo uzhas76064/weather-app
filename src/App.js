@@ -21,7 +21,7 @@ export default class App extends React.Component {
     };
 
     updateWeather = () => {
-      this.weather.getWeather("Berlin", "metric")
+      this.weather.getWeather("Berlin", "metric", "ru")
           .then(data => {
               this.setState({
                   name: data.name,
@@ -42,6 +42,7 @@ export default class App extends React.Component {
         return (
             <div className="App">
                 <Container>
+                    <h1>Погода!</h1>
                     <Weather cityName={name} windSpeed={wind} icon={icon} clouds={clouds}/>
                 </Container>
             </div>

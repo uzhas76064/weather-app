@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
-    
+    width: 25%;
 `;
 
 const Weather = (props) => {
     return (
         <Card>
-            <h2>Город:{props.cityName}</h2>
+            <h3>Город:{props.cityName}</h3>
             <div>Ветер:{props.windSpeed}</div>
             <div>Облачность(%):{props.clouds}</div>
         </Card>
