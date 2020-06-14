@@ -2,7 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import Weather from "./components/Weather/Weather";
 import './App.css';
-import WeatherAPI from "../src/services/WeatherAPI";
+import Input from "./components/Input/Input";
+import FindingWeather from "./components/FindingWeather/FindingWeather";
 
 const Container = styled.div`
   max-width: 800px;
@@ -10,42 +11,34 @@ const Container = styled.div`
   text-align: center;
 `;
 
-export default class App extends React.Component {
-    weather = new WeatherAPI();
-
+export default class App extends React.Component{
     state = {
-        name: null,
-        wind: null,
-        icon: null,
-        clouds: null
+        visible: false,
+        inputValue: ""
     };
 
-    updateWeather = () => {
-      this.weather.getWeather("Berlin", "metric", "ru")
-          .then(data => {
-              this.setState({
-                  name: data.name,
-                  wind: data.wind.speed,
-                  icon: data.weather.icon,
-                  clouds: data.clouds.all
-              });
-          });
+    findForecast = (e) => {
+        e.preventDefault();
+      this.setState({visible: !this.state.visible})
     };
 
-    componentDidMount() {
-        this.updateWeather();
-    }
+    inputCity = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            inputValue: e.target.value
+        })
+    };
 
     render() {
-        const { name, wind, icon, clouds } = this.state;
-
         return (
             <div className="App">
                 <Container>
                     <h1>Погода!</h1>
-                    <Weather cityName={name} windSpeed={wind} icon={icon} clouds={clouds}/>
+                    <Weather/>
+                    <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
+                    {this.state.visible ?  <FindingWeather city={this.state.inputValue}/> : null}
                 </Container>
             </div>
         );
     }
-}
+};

@@ -3,15 +3,21 @@ export default class WeatherAPI {
 
     constructor() {
         this._url = `https://api.openweathermap.org/data/2.5/weather?q=`;
+        this._urls = [
+            `https://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=${this.#APP_ID}`,
+            `https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${this.#APP_ID}`,
+            `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${this.#APP_ID}`
+        ];
     }
 
-    async getWeather(city="Moscow", units="imperial", lang="en") {
-        let result = await fetch(`${this._url}${city}&appid=${this.#APP_ID}&units=${units}&lang=${lang}`);
-
-        if (!result.ok) {
-            throw new Error(`Couldn't fetch ${result.url}. Status: ${result.status}`);
-        }
-
-        return await result.json();
+    async getCitiesWeather(cities=this._urls, units="imperial", lang="en") {
+        return Promise.all(cities.map(async cityUrl =>
+            fetch(cityUrl)
+                .then(async response => {
+                    if(response.ok) return response;
+                })
+                .then(async response => await response.json())
+                .catch(response => console.log(response.error))
+        ));
     }
 }
