@@ -4,7 +4,7 @@ import Weather from "./components/Weather/Weather";
 import WeatherAPI from "../src/services/WeatherAPI";
 import './App.css';
 import Input from "./components/Input/Input";
-import FindingWeather from "./components/FindingWeather/FindingWeather";
+import Card from "./components/Card/Card";
 
 const Container = styled.div`
   max-width: 800px;
@@ -17,13 +17,27 @@ export default class App extends React.Component{
 
     state = {
         visible: false,
-        inputValue: ""
+        clouds: null,
+        cityName: null,
+        temp: null,
+        windSpeed: null
     };
 
     findForecast = (e) => {
         e.preventDefault();
-        this.weather.getWeather(e);
-      //this.setState({visible: !this.state.visible})
+        let data = this.weather.getWeather(e);
+
+        data.then(response => response)
+            .then(d => {
+                console.log(d)
+                this.setState({
+                    visible: !this.state.visible,
+                    clouds: d.clouds.all,
+                    cityName: d.name,
+                    temp: d.main.temp,
+                    windSpeed: d.wind.speed
+                })
+            })
     };
 
     inputCity = (e) => {
@@ -40,7 +54,7 @@ export default class App extends React.Component{
                     <h1>Погода!</h1>
                     <Weather/>
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
-                    {this.state.visible ?  <FindingWeather city={this.state.inputValue}/> : null}
+                    {this.state.visible ?  <Card cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null}
                 </Container>
             </div>
         );

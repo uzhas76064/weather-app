@@ -8,6 +8,8 @@ export default class WeatherAPI {
             `https://api.openweathermap.org/data/2.5/weather?q=Berlin&appid=${this.#APP_ID}`,
             `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${this.#APP_ID}`
         ];
+
+        this.getWeather = this.getWeather.bind(this)
     }
 
     async getCitiesWeather(cities=this._urls, units="imperial", lang="en") {
