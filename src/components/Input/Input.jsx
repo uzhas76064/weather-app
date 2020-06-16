@@ -20,8 +20,8 @@ const SearchBlock = styled.div`
 const Input = (props) => {
     return (
         <SearchBlock>
-            <form action="" onSubmit={props.findForecast}>
-                <input onChange={props.inputCity} type="text" required={true} placeholder="Введите название города"/>
+            <form onSubmit={props.findForecast}>
+                <input name="city" onChange={props.inputCity} type="text" required={true} placeholder="Введите название города"/>
                 <button>Найти</button>
             </form>
         </SearchBlock>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Weather from "./components/Weather/Weather";
+import WeatherAPI from "../src/services/WeatherAPI";
 import './App.css';
 import Input from "./components/Input/Input";
 import FindingWeather from "./components/FindingWeather/FindingWeather";
@@ -12,6 +13,8 @@ const Container = styled.div`
 `;
 
 export default class App extends React.Component{
+    weather = new WeatherAPI();
+
     state = {
         visible: false,
         inputValue: ""
@@ -19,7 +22,8 @@ export default class App extends React.Component{
 
     findForecast = (e) => {
         e.preventDefault();
-      this.setState({visible: !this.state.visible})
+        this.weather.getWeather(e);
+      //this.setState({visible: !this.state.visible})
     };
 
     inputCity = (e) => {

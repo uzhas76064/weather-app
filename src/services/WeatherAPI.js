@@ -20,4 +20,12 @@ export default class WeatherAPI {
                 .catch(response => console.log(response.error))
         ));
     }
+
+    async getWeather(e) {
+        let city = e.target.elements.city.value;
+        const inputCityUrl = await fetch(`${this._url}${city}&appid=${this.#APP_ID}`);
+        const data = await inputCityUrl.json();
+
+        return data;
+    }
 }
