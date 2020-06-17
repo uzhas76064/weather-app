@@ -1,3 +1,8 @@
+:root {
+  background: radial-gradient(rgb(99, 154, 255), rgb(98, 145, 245), rgb(98, 136, 235), rgb(97, 126, 224), rgb(97, 117, 214), rgb(96, 108, 204), rgb(96, 99, 194), rgb(95, 90, 184), rgb(95, 81, 174), rgb(94, 71, 163), rgb(94, 62, 153), rgb(93, 53, 143)) no-repeat fixed;
+  background-size: cover;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
