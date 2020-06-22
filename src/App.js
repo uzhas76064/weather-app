@@ -39,16 +39,16 @@ export default class App extends React.Component{
 
         data.then(response => response)
             .then(d => {
-                console.log(d)
+                console.log(d);
                 this.setState({
                     visible: !this.state.visible,
                     clouds: d.clouds.all,
                     cityName: d.name,
                     temp: d.main.temp,
+                    windSpeed: d.wind.speed,
                     visibility: d.visibility,
                     pressure: d.main.pressure,
                     humidity: d.main.humidity,
-                    windDeg: d.wind.deg,
                     icon: d.weather[0].icon
                 })
             })
