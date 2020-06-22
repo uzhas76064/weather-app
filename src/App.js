@@ -2,12 +2,14 @@ import React from 'react';
 import styled from "styled-components";
 import WeatherService from "./services/WeatherService";
 import Input from "./components/Input/Input";
-import Card from "./components/Card/Card";
+import Weather from "./components/Card/Card";
+import Map from "./components/Map/Map";
 
 const Container = styled.div`
   max-width: 800px;
   margin 0 auto;
   text-align: center;
+  margin-bottom: 150px;
   
   & h1 {
     color: white;
@@ -63,7 +65,7 @@ export default class App extends React.Component{
 
     render() {
         let title = this.weather.setRandomTitle();
-        let foundCity = this.state.visible ?  <Card icon={this.state.icon} windDeg={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
+        let foundCity = this.state.visible ?  <Weather icon={this.state.icon} windDeg={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
 
         return (
             <div className="App">
@@ -72,6 +74,7 @@ export default class App extends React.Component{
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
                     { foundCity }
                 </Container>
+                <Map/>
             </div>
         );
     }
