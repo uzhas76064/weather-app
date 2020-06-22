@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
-    width: 56%;
+    width: 64%;
     margin: auto;
     margin-top: 50px;
     color: white;
@@ -19,8 +19,19 @@ const Card = styled.div`
     
     & div {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         font-size: 18px;
+    }
+    
+    & div img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+    }
+    
+    & div:first-child {
+        justify-content: center;
     }
     
     & div span {
@@ -29,20 +40,43 @@ const Card = styled.div`
 `;
 
 const Weather = (props) => {
+    const icon = `http://openweathermap.org/img/w/${props.icon}.png`;
+
     return (
         <Card>
-            <h3>Город: {props.cityName}</h3>
+            <div>
+                <h3>Город: {props.cityName} </h3>
+                <img src={icon} alt="Weather state"/>
+            </div>
            <div>
-               <p>Ветер: <span>{props.windSpeed}</span>м/с</p>
-               <p>Облачность: <span>{props.clouds}</span>%</p>
+               <div>
+                   <img src="https://img.icons8.com/dusk/64/000000/wind.png" alt="Wind speed"/>
+                   <p> Ветер: <span>{props.windSpeed}</span> м/с</p>
+               </div>
+               <div>
+                   <img src="https://img.icons8.com/cotton/64/000000/clouds.png" alt="Cloudiness"/>
+                   <p>Облачность: <span>{props.clouds}</span>%</p>
+               </div>
            </div>
             <div>
-                <p>Температура: <span>{props.temp} </span>&deg;C</p>
-                <p>Влажность: <span>{props.humidity}</span>%</p>
+                <div>
+                    <img src="https://img.icons8.com/ultraviolet/40/000000/temperature-sensitive.png" alt="Temperature"/>
+                    <p>Температура: <span>{props.temp} </span>&deg;C</p>
+                </div>
+               <div>
+                   <img src="https://img.icons8.com/ultraviolet/48/000000/wet.png" alt="Humidity"/>
+                   <p>Влажность: <span>{props.humidity}</span>%</p>
+               </div>
             </div>
             <div>
-                <p>Давление: <span>{Math.floor(props.pressure * 0.75)} </span>мм.рт.ст</p>
-                <p>Темп. ветра: <span>{props.windDeg} </span>&deg;C</p>
+                <div>
+                    <img src="https://img.icons8.com/officexs/40/000000/pressure.png" alt="Pressure"/>
+                    <p>Давление: <span>{Math.floor(props.pressure * 0.75)} </span>мм.рт.ст</p>
+                </div>
+                <div>
+                    <img src="https://img.icons8.com/cotton/40/000000/telescope.png" alt="Visibility"/>
+                    <p>Видимость <span>{props.windDeg /1000} </span> км.</p>
+                </div>
             </div>
         </Card>
     );

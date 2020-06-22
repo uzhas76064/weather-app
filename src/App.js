@@ -29,7 +29,8 @@ export default class App extends React.Component{
         windSpeed: null,
         pressure: null,
         humidity: null,
-        windDeg: null
+        visibility: null,
+        icon: null
     };
 
     findForecast = (e) => {
@@ -44,10 +45,11 @@ export default class App extends React.Component{
                     clouds: d.clouds.all,
                     cityName: d.name,
                     temp: d.main.temp,
-                    windSpeed: d.wind.speed,
+                    visibility: d.visibility,
                     pressure: d.main.pressure,
                     humidity: d.main.humidity,
-                    windDeg: d.wind.deg
+                    windDeg: d.wind.deg,
+                    icon: d.weather[0].icon
                 })
             })
     };
@@ -61,7 +63,7 @@ export default class App extends React.Component{
 
     render() {
         let title = this.weather.setRandomTitle();
-        let foundCity = this.state.visible ?  <Card windDeg={this.state.windDeg} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
+        let foundCity = this.state.visible ?  <Card icon={this.state.icon} windDeg={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
 
         return (
             <div className="App">
