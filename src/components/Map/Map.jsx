@@ -11,13 +11,21 @@ const Frame = styled.div`
     }
 `;
 
+<<<<<<< HEAD
 const Map = () => {
+=======
+const Map = (props) => {
+>>>>>>> 5fc0f918c138e4f6d921127074b8aff2a71db918
     let url = "https://openweathermap.org/weathermap?basemap=map&cities=false&layer=clouds&lat=69.5959&lon=-9.6680&zoom=3";
 
     return (
         <Frame>
+<<<<<<< HEAD
             <iframe src={url} title="Map" scrolling="no" frameBorder="0">iframe не поддерживается вашим браузером
             </iframe>
+=======
+            <iframe src={url} title="Map" scrolling="no" frameBorder="0">iframe не поддерживается вашим браузером</iframe>
+>>>>>>> 5fc0f918c138e4f6d921127074b8aff2a71db918
         </Frame>
     );
 };
