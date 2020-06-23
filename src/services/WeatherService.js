@@ -5,7 +5,7 @@ export default class WeatherService {
 
     constructor() {
         this._url = `https://api.openweathermap.org/data/2.5/weather?q=`;
-        this._titles = ["Погода!", "Самый точный прогноз", "Forecast для вас!"];
+        this._titles = ["Погода!", "Самый точный прогноз", "Forecast для вас!", "Погодочка", "Эх.. Погода.."];
 
         this.getWeather = this.getWeather.bind(this)
     }
@@ -20,8 +20,6 @@ export default class WeatherService {
     async getWeather(e) {
         let city = e.target.elements.city.value;
         const inputCityUrl = await fetch(`${this._url}${city}${this.#APP_ID}&lang=${this.#lang}&units=${this.#units}`);
-        const data = await inputCityUrl.json();
-
-        return data;
+        return await inputCityUrl.json();
     }
 }

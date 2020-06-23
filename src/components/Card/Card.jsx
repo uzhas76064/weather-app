@@ -1,5 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import NameParam from "./WeatherParams/NameParam";
+import WindParam from "./WeatherParams/WindParam";
+import CloudinessParam from "./WeatherParams/CloudinessParam";
+import VisibilityParam from "./WeatherParams/VisibilityParam";
+import HumidityParam from "./WeatherParams/HumidityParam";
+import TemperatureParam from "./WeatherParams/TemperatureParam";
+import PressureParam from "./WeatherParams/PressureParam";
 
 const Card = styled.div`
     width: 64%;
@@ -45,39 +52,20 @@ const Weather = (props) => {
 
     return (
         <Card>
-            <div>
-                <h3>Город: {props.cityName} </h3>
-                <img src={icon} alt="Weather state"/>
-            </div>
            <div>
-               <div>
-                   <img src="https://img.icons8.com/dusk/64/000000/wind.png" alt="Wind speed"/>
-                   <p> Ветер: <span>{props.windSpeed}</span> м/с</p>
-               </div>
-               <div>
-                   <img src="https://img.icons8.com/cotton/64/000000/clouds.png" alt="Cloudiness"/>
-                   <p>Облачность: <span>{props.clouds}</span>%</p>
-               </div>
+               <NameParam cityName={props.cityName} icon={icon}/>
            </div>
             <div>
-                <div>
-                    <img src="https://img.icons8.com/ultraviolet/40/000000/temperature-sensitive.png" alt="Temperature"/>
-                    <p>Температура: <span>{props.temp} </span>&deg;C</p>
-                </div>
-               <div>
-                   <img src="https://img.icons8.com/ultraviolet/48/000000/wet.png" alt="Humidity"/>
-                   <p>Влажность: <span>{props.humidity}</span>%</p>
-               </div>
+               <WindParam windSpeed={props.windSpeed}/>
+              <TemperatureParam temp={props.temp}/>
             </div>
             <div>
-                <div>
-                    <img src="https://img.icons8.com/officexs/40/000000/pressure.png" alt="Pressure"/>
-                    <p>Давление: <span>{Math.floor(props.pressure * 0.75)} </span>мм.рт.ст</p>
-                </div>
-                <div>
-                    <img src="https://img.icons8.com/cotton/40/000000/telescope.png" alt="Visibility"/>
-                    <p>Видимость <span>{props.windDeg /1000} </span> км.</p>
-                </div>
+               <VisibilityParam visibility={props.visibility}/>
+               <HumidityParam humidity={props.humidity}/>
+            </div>
+            <div>
+                <PressureParam pressure={props.pressure}/>
+                <CloudinessParam cloudiness={props.clouds}/>
             </div>
         </Card>
     );

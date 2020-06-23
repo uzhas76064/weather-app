@@ -11,12 +11,13 @@ const Frame = styled.div`
     }
 `;
 
-const Map = (props) => {
+const Map = () => {
     let url = "https://openweathermap.org/weathermap?basemap=map&cities=false&layer=clouds&lat=69.5959&lon=-9.6680&zoom=3";
 
     return (
         <Frame>
-            <iframe src={url} title="Map" scrolling="no" frameBorder="0">iframe не поддерживается вашим браузером</iframe>
+            <iframe src={url} title="Map" scrolling="no" frameBorder="0">iframe не поддерживается вашим браузером
+            </iframe>
         </Frame>
     );
 };

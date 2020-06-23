@@ -65,7 +65,7 @@ export default class App extends React.Component{
 
     render() {
         let title = this.weather.setRandomTitle();
-        let foundCity = this.state.visible ?  <Weather icon={this.state.icon} windDeg={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
+        let foundCity = this.state.visible ?  <Weather icon={this.state.icon} visibility={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
 
         return (
             <div className="App">
