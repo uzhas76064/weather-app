@@ -35,7 +35,7 @@ const Input = (props) => {
     return (
         <SearchBlock>
             <form onSubmit={props.findForecast}>
-                <input name="city" onChange={props.inputCity} type="text" required={true} placeholder="Введите название города"/>
+                <input autoCorrect="on" name="city" onChange={props.inputCity} type="text" required={true} placeholder="Введите название города"/>
                 <button>Найти</button>
             </form>
         </SearchBlock>
