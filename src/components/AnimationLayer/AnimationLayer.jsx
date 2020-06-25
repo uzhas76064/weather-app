@@ -1,5 +1,12 @@
 import React from "react";
 import styled, {keyframes} from "styled-components";
+import wind from "../../assets/wind.svg";
+
+const rotate = keyframes`
+    100% {
+        transform: rotate(-360deg);
+    }
+`;
 
 const float = keyframes`
     0%, 100% {
@@ -25,12 +32,18 @@ const pulsing = keyframes`
     }
 `;
 
-const Pulsing = styled.div`
+const Rotation = styled.div`
+    animation: ${rotate};
+    animation-duration: 1.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; 
+`;
+
+const Pulsation = styled.div`
     animation-name: ${pulsing};
     animation-duration: 3s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite; 
-    animation-direction: normal;
     animation-fill-mode: forwards;
 `;
 
@@ -41,6 +54,9 @@ const Floating = styled.div`
     animation: ${float} 5s ease-in-out 0s infinite alternate forwards;
 }`;
 
+export const Wind = () => {
+    return <Rotation><img src={wind} alt="" style={{width: "4em", height: "4em", padding: "10px"}}/></Rotation>
+};
 
 const AnimationLayer = () => {
     return (
@@ -51,9 +67,9 @@ const AnimationLayer = () => {
             <Floating>
                 <img style={{position: "relative", right: "7em", left: "10em"}} src="https://img.icons8.com/dusk/64/000000/cloud.png" alt="cloud"/>
             </Floating>
-            <Pulsing>
+            <Pulsation>
                 <img style={{position: "relative", right: "2em", top: "6em"}} src="https://img.icons8.com/dusk/64/000000/cloud.png" alt="cloud"/>
-            </Pulsing>
+            </Pulsation>
         </div>
     );
 };

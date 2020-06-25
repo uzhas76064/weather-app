@@ -4,6 +4,7 @@ import WeatherService from "./services/WeatherService";
 import Input from "./components/Input/Input";
 import Weather from "./components/Card/Card";
 import AnimationLayer from "./components/AnimationLayer/AnimationLayer";
+import { Wind } from "./components/AnimationLayer/AnimationLayer";
 
 const Container = styled.div`
   max-width: 800px;
@@ -16,10 +17,8 @@ const Container = styled.div`
     font-family: 'Balsamiq Sans', cursive;
     font-weight: 700;
     font-style: italic;
-    margin-top: 100px;
   }
 `;
-
 
 export default class App extends React.Component{
     weather = new WeatherService();
@@ -71,6 +70,7 @@ export default class App extends React.Component{
         return (
             <div className="App">
                 <Container>
+                    <Wind/>
                     <h1>{ title }</h1>
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
                     { foundCity }

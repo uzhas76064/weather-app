@@ -7,6 +7,8 @@ import VisibilityParam from "./WeatherParams/VisibilityParam";
 import HumidityParam from "./WeatherParams/HumidityParam";
 import TemperatureParam from "./WeatherParams/TemperatureParam";
 import PressureParam from "./WeatherParams/PressureParam";
+import { Wind } from "../AnimationLayer/AnimationLayer";
+import OpenButton from "../OpenButton/OpenButton";
 
 const Card = styled.div`
     width: 64%;
@@ -67,6 +69,7 @@ const Weather = (props) => {
                 <PressureParam pressure={props.pressure}/>
                 <CloudinessParam cloudiness={props.clouds}/>
             </div>
+            <OpenButton/>
         </Card>
     );
 };
