@@ -1,7 +1,7 @@
 {
   "name": "weather-app",
   "homepage": "https://uzhas76064.github.io/weather-app",
-  "version": "1.0",
+  "version": "1.5",
   "private": true,
   "dependencies": {
     "@kunukn/react-collapse": "^2.2.9",
@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "push": "git push origin master"
   },
   "eslintConfig": {
     "extends": "react-app"
