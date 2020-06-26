@@ -16,6 +16,11 @@ export default class WeatherService {
         return this._titles[titleIndex];
     }
 
+    async getDefaultWeather(city="Москва") {
+        const data = await fetch(`${this._url}${city}${this.#APP_ID}&lang=${this.#lang}&units=${this.#units}`);
+        return await data.json();
+    }
+
     //Получение погоды через input
     async getWeather(e) {
         let city = e.target.elements.city.value;

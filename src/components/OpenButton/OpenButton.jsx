@@ -12,7 +12,7 @@ const Button = styled(SearchButton)`
 
 const OpenButton = () => {
     return (
-        <Button><img width="30px" src="https://img.icons8.com/offices/50/000000/gas-mask.png"/>Индекс загрязнения</Button>
+        <Button><img width="30px" src="https://img.icons8.com/offices/50/000000/gas-mask.png" alt=""/>Индекс загрязнения</Button>
     );
 };
 

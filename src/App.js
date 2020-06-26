@@ -24,34 +24,55 @@ export default class App extends React.Component{
     weather = new WeatherService();
 
     state = {
+        loading: false,
         visible: false,
-        clouds: null,
-        cityName: null,
-        temp: null,
-        windSpeed: null,
-        pressure: null,
-        humidity: null,
-        visibility: null,
-        icon: null
+        weather: {}
+    };
+
+    setDefaultWeather = () => {
+      let data = this.weather.getDefaultWeather();
+
+      data.then(response => response)
+          .then(d => {
+              console.log(d);
+              this.setState({
+                  loading: false,
+                  visible: true,
+                  weather: {
+                      clouds: d.clouds.all,
+                      cityName: d.name,
+                      temp: d.main.temp,
+                      windSpeed: d.wind.speed,
+                      visibility: d.visibility,
+                      pressure: d.main.pressure,
+                      humidity: d.main.humidity,
+                      icon: d.weather[0].icon
+                  }
+              })
+          })
     };
 
     findForecast = (e) => {
         e.preventDefault();
+        this.setState({loading: true});
         let data = this.weather.getWeather(e);
 
         data.then(response => response)
             .then(d => {
                 console.log(d);
                 this.setState({
+                    loading: false,
                     visible: true,
-                    clouds: d.clouds.all,
-                    cityName: d.name,
-                    temp: d.main.temp,
-                    windSpeed: d.wind.speed,
-                    visibility: d.visibility,
-                    pressure: d.main.pressure,
-                    humidity: d.main.humidity,
-                    icon: d.weather[0].icon
+                    weather: {
+                       clouds: d.clouds.all,
+                       cityName: d.name,
+                       temp: d.main.temp,
+                       windSpeed: d.wind.speed,
+                       visibility: d.visibility,
+                       pressure: d.main.pressure,
+                       humidity: d.main.humidity,
+                       icon: d.weather[0].icon
+                   }
                 })
             })
     };
@@ -63,15 +84,27 @@ export default class App extends React.Component{
         })
     };
 
-    render() {
-        let title = this.weather.setRandomTitle();
-        let foundCity = this.state.visible ?  <Weather icon={this.state.icon} visibility={this.state.visibility} humidity={this.state.humidity} pressure={this.state.pressure} temp={this.state.temp} cityName={this.state.cityName} windSpeed={this.state.windSpeed} clouds={this.state.clouds}/> : null;
+    componentDidMount() {
+        this.setDefaultWeather();
+    }
 
+    title = this.weather.setRandomTitle();
+
+    render() {
+        let foundCity = this.state.visible && this.state.loading === false?
+            <Weather icon={this.state.weather.icon}
+                     visibility={this.state.weather.visibility}
+                     humidity={this.state.weather.humidity}
+                     pressure={this.state.weather.pressure}
+                     temp={this.state.weather.temp}
+                     cityName={this.state.weather.cityName}
+                     windSpeed={this.state.weather.windSpeed}
+                     clouds={this.state.weather.clouds}/> : <h3 style={{color: "white"}}>Загрузка...</h3>;
         return (
             <div className="App">
                 <Container>
                     <Wind/>
-                    <h1>{ title }</h1>
+                    <h1>{ this.title }</h1>
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
                     { foundCity }
                     <AnimationLayer/>
