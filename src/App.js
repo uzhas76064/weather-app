@@ -4,7 +4,7 @@ import WeatherService from "./services/WeatherService";
 import Input from "./components/Input/Input";
 import Weather from "./components/Card/Card";
 import AnimationLayer from "./components/AnimationLayer/AnimationLayer";
-import { Wind } from "./components/AnimationLayer/AnimationLayer";
+import {Wind} from "./components/AnimationLayer/AnimationLayer";
 
 const Container = styled.div`
   max-width: 800px;
@@ -20,43 +20,17 @@ const Container = styled.div`
   }
 `;
 
-export default class App extends React.Component{
+export default class App extends React.Component {
     weather = new WeatherService();
 
     state = {
         loading: false,
         visible: false,
+        title: null,
         weather: {}
     };
 
-    setDefaultWeather = () => {
-      let data = this.weather.getDefaultWeather();
-
-      data.then(response => response)
-          .then(d => {
-              console.log(d);
-              this.setState({
-                  loading: false,
-                  visible: true,
-                  weather: {
-                      clouds: d.clouds.all,
-                      cityName: d.name,
-                      temp: d.main.temp,
-                      windSpeed: d.wind.speed,
-                      visibility: d.visibility,
-                      pressure: d.main.pressure,
-                      humidity: d.main.humidity,
-                      icon: d.weather[0].icon
-                  }
-              })
-          })
-    };
-
-    findForecast = (e) => {
-        e.preventDefault();
-        this.setState({loading: true});
-        let data = this.weather.getWeather(e);
-
+    changeState = (data) => {
         data.then(response => response)
             .then(d => {
                 console.log(d);
@@ -64,17 +38,30 @@ export default class App extends React.Component{
                     loading: false,
                     visible: true,
                     weather: {
-                       clouds: d.clouds.all,
-                       cityName: d.name,
-                       temp: d.main.temp,
-                       windSpeed: d.wind.speed,
-                       visibility: d.visibility,
-                       pressure: d.main.pressure,
-                       humidity: d.main.humidity,
-                       icon: d.weather[0].icon
-                   }
+                        clouds: d.clouds.all,
+                        cityName: d.name,
+                        temp: d.main.temp,
+                        windSpeed: d.wind.speed,
+                        visibility: d.visibility,
+                        pressure: d.main.pressure,
+                        humidity: d.main.humidity,
+                        icon: d.weather[0].icon
+                    }
                 })
             })
+    };
+
+    setDefaultWeather = () => {
+        let data = this.weather.getDefaultWeather();
+        this.changeState(data);
+    };
+
+    findForecast = (e) => {
+        e.preventDefault();
+        this.setState({loading: true});
+        let data = this.weather.getWeather(e);
+
+        this.changeState(data);
     };
 
     inputCity = (e) => {
@@ -85,13 +72,12 @@ export default class App extends React.Component{
     };
 
     componentDidMount() {
+        this.setState({title: this.weather.setRandomTitle()});
         this.setDefaultWeather();
     }
 
-    title = this.weather.setRandomTitle();
-
     render() {
-        let foundCity = this.state.visible && this.state.loading === false?
+        let foundCity = this.state.visible && this.state.loading === false ?
             <Weather icon={this.state.weather.icon}
                      visibility={this.state.weather.visibility}
                      humidity={this.state.weather.humidity}
@@ -104,9 +90,9 @@ export default class App extends React.Component{
             <div className="App">
                 <Container>
                     <Wind/>
-                    <h1>{ this.title }</h1>
+                    <h1>{this.state.title}</h1>
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
-                    { foundCity }
+                    {foundCity}
                     <AnimationLayer/>
                 </Container>
 
