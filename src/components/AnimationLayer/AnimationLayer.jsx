@@ -60,7 +60,7 @@ export const Wind = () => {
 
 const AnimationLayer = () => {
     return (
-        <div>
+        <div style={{marginBottom: "250px"}}>
             <Floating>
                 <img style={{position: "relative", right: "19em", top: "2em"}} src="https://img.icons8.com/dusk/64/000000/cloud.png" alt="cloud"/>
             </Floating>

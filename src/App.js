@@ -5,12 +5,13 @@ import Input from "./components/Input/Input";
 import Weather from "./components/Card/Card";
 import AnimationLayer from "./components/AnimationLayer/AnimationLayer";
 import {Wind} from "./components/AnimationLayer/AnimationLayer";
+import Footer from "./components/Footer/Footer";
 
 const Container = styled.div`
   max-width: 800px;
   margin 0 auto;
   text-align: center;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   
   & h1 {
     color: white;
@@ -94,8 +95,8 @@ export default class App extends React.Component {
                     <Input inputCity={this.inputCity} findForecast={this.findForecast}/>
                     {foundCity}
                     <AnimationLayer/>
+                    <Footer/>
                 </Container>
-
             </div>
         );
     }
