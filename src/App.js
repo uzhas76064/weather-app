@@ -26,6 +26,7 @@ export default class App extends React.Component {
 
     state = {
         loading: false,
+        inputValue: null,
         visible: false,
         aqiOpened: false,
         title: null,
@@ -54,8 +55,8 @@ export default class App extends React.Component {
             })
     };
 
-    openAQI = (e) => {
-        let aqi = this.weather.getAQI(e);
+    openAQI = () => {
+        let aqi = this.weather.getAQI(this.state.inputValue);
         this.setState({aqiOpened: !this.state.aqiOpened});
 
         aqi.then(response => response)

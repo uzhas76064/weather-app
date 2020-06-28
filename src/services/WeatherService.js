@@ -11,9 +11,8 @@ export default class WeatherService {
         this.getWeather = this.getWeather.bind(this)
     }
 
-    async getAQI(e) {
-
-        const data = await fetch(`https://api.waqi.info/feed/moscow/?token=5b51f35cde40ee47e1cf1267ccbbb1eecc8daf78`);
+    async getAQI(city) {
+        const data = await fetch(`https://api.waqi.info/feed/${city}/?token=${this.#AQI_TOKEN}`);
 
         return await data.json();
     }
