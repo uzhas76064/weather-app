@@ -68,7 +68,7 @@ const Weather = (props) => {
                 <PressureParam pressure={props.pressure}/>
                 <CloudinessParam cloudiness={props.clouds}/>
             </div>
-            <OpenButton/>
+            <OpenButton station={props.station} aqi={props.aqi} aqiOpened={props.aqiOpened} openAQI={props.openAQI}/>
         </Card>
     );
 };

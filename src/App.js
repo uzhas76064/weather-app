@@ -27,8 +27,10 @@ export default class App extends React.Component {
     state = {
         loading: false,
         visible: false,
+        aqiOpened: false,
         title: null,
-        weather: {}
+        weather: {},
+        aqi: {}
     };
 
     changeState = (data) => {
@@ -47,9 +49,26 @@ export default class App extends React.Component {
                         pressure: d.main.pressure,
                         humidity: d.main.humidity,
                         icon: d.weather[0].icon
-                    }
+                    },
                 })
             })
+    };
+
+    openAQI = (e) => {
+        let aqi = this.weather.getAQI(e);
+        this.setState({aqiOpened: !this.state.aqiOpened});
+
+        aqi.then(response => response)
+            .then(data => {
+               this.setState({
+                   aqi: {
+                       aqi: data.data.aqi,
+                       station: data.data.city.name
+                   }
+               })
+            });
+
+        console.log(aqi)
     };
 
     setDefaultWeather = () => {
@@ -86,7 +105,11 @@ export default class App extends React.Component {
                      temp={this.state.weather.temp}
                      cityName={this.state.weather.cityName}
                      windSpeed={this.state.weather.windSpeed}
-                     clouds={this.state.weather.clouds}/> : <h3 style={{color: "white"}}>Загрузка...</h3>;
+                     clouds={this.state.weather.clouds}
+                     aqiOpened={this.state.aqiOpened}
+                     openAQI={this.openAQI}
+                     aqi={this.state.aqi.aqi}
+                     station={this.state.aqi.station}/> : <h3 style={{color: "white"}}>Загрузка...</h3>;
         return (
             <div className="App">
                 <Container>

@@ -1,5 +1,6 @@
 export default class WeatherService {
     #APP_ID = "&appid=e7651cfedf9e77b455ed7fda7a267fed";
+    #AQI_TOKEN = "5b51f35cde40ee47e1cf1267ccbbb1eecc8daf78";
     #lang = "ru";
     #units = "metric";
 
@@ -10,12 +11,20 @@ export default class WeatherService {
         this.getWeather = this.getWeather.bind(this)
     }
 
+    async getAQI(e) {
+
+        const data = await fetch(`https://api.waqi.info/feed/moscow/?token=5b51f35cde40ee47e1cf1267ccbbb1eecc8daf78`);
+
+        return await data.json();
+    }
+
     //Установка случайного заголовка
     setRandomTitle() {
         let titleIndex = Math.floor(Math.random()*3);
         return this._titles[titleIndex];
     }
 
+    //Установка прогноза по умолчанию
     async getDefaultWeather(city="Москва") {
         const data = await fetch(`${this._url}${city}${this.#APP_ID}&lang=${this.#lang}&units=${this.#units}`);
         return await data.json();
