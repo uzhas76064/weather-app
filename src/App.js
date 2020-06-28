@@ -34,6 +34,7 @@ export default class App extends React.Component {
         aqi: {}
     };
 
+    //Изменение состояния
     changeState = (data) => {
         data.then(response => response)
             .then(d => {
@@ -53,8 +54,10 @@ export default class App extends React.Component {
                     },
                 })
             })
+            .catch(error => error.message)
     };
 
+    //Открытие индекса качества воздуха
     openAQI = () => {
         let aqi = this.weather.getAQI(this.state.inputValue);
         this.setState({aqiOpened: !this.state.aqiOpened});
@@ -67,24 +70,29 @@ export default class App extends React.Component {
                        station: data.data.city.name
                    }
                })
-            });
+            })
+            .catch(error => error);
 
         console.log(aqi)
     };
 
+    //Установка прогноза по умолчанию
     setDefaultWeather = () => {
         let data = this.weather.getDefaultWeather();
         this.changeState(data);
     };
 
+    //Поиск прогноза по введеному городу
     findForecast = (e) => {
         e.preventDefault();
         this.setState({loading: true});
         let data = this.weather.getWeather(e);
 
         this.changeState(data);
+        this.setState({aqiOpened: false});
     };
 
+    //Отслеживание события ввода названия города
     inputCity = (e) => {
         console.log(e.target.value);
         this.setState({
