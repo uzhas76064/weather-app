@@ -9,7 +9,7 @@ import Footer from "./components/Footer/Footer";
 
 const Container = styled.div`
   max-width: 800px;
-  margin 0 auto;
+  margin: 0 auto;
   text-align: center;
   margin-bottom: 50px;
   
@@ -47,7 +47,6 @@ export default class App extends React.Component {
                         cityName: d.name,
                         temp: d.main.temp,
                         windSpeed: d.wind.speed,
-                        visibility: d.visibility,
                         pressure: d.main.pressure,
                         humidity: d.main.humidity,
                         icon: d.weather[0].icon
@@ -108,7 +107,6 @@ export default class App extends React.Component {
     render() {
         let foundCity = this.state.visible && this.state.loading === false ?
             <Weather icon={this.state.weather.icon}
-                     visibility={this.state.weather.visibility}
                      humidity={this.state.weather.humidity}
                      pressure={this.state.weather.pressure}
                      temp={this.state.weather.temp}

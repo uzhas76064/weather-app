@@ -3,7 +3,6 @@ import styled from "styled-components";
 import NameParam from "./WeatherParams/NameParam";
 import WindParam from "./WeatherParams/WindParam";
 import CloudinessParam from "./WeatherParams/CloudinessParam";
-import VisibilityParam from "./WeatherParams/VisibilityParam";
 import HumidityParam from "./WeatherParams/HumidityParam";
 import TemperatureParam from "./WeatherParams/TemperatureParam";
 import PressureParam from "./WeatherParams/PressureParam";
@@ -61,7 +60,6 @@ const Weather = (props) => {
               <TemperatureParam temp={props.temp}/>
             </div>
             <div>
-               <VisibilityParam visibility={props.visibility}/>
                <HumidityParam humidity={props.humidity}/>
             </div>
             <div>
